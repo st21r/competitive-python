@@ -1,0 +1,2 @@
+for i in range(2 ** n):
+    items = [j for j in range(n) if (i >> j) & 1]

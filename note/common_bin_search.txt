@@ -1,0 +1,20 @@
+# 以下のことがわかっているときに、条件を満たす最小のxを見つけたい
+
+# x = left は条件を満たさない
+# x = right は条件を満たす
+# left と right の間に条件を満たすようになる境界がある
+# 境界まではずっと条件を満たしておらず、境界から先はずっと条件を満たしている
+
+# テンプレ
+
+left = 最小のx - 1
+right = 最大のx + 1
+
+while right - left > 1:
+    x = (left + right) // 2
+    if xが条件を満たす場合: right = x
+    else: left = x
+
+result = right
+
+# left は条件を満たさない最大の値、right は条件を満たす最小の値になっている

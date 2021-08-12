@@ -1,0 +1,9 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--select=F"
+    ],
+    "python.linting.flake8CategorySeverity.F": "Hint",
+    "python.linting.enabled": true,
+}

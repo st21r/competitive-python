@@ -1,0 +1,62 @@
+{
+    "segment_tree.py": {
+        "prefix": "imlib segment_tree",
+        "body": "class SegmentTree:\n    def __init__(self, n, func=lambda x, y: min(x, y), ide=float(\"inf\")):\n        self.n, self.m = n, 1 << (n-1).bit_length()\n        self.data = [ide] * (self.m*2)\n        self.func, self.ide = func, ide\n\n    def build(self, data):\n        for i, x in enumerate(data):\n            self.data[self.m+i] = x\n        for i in range(self.m-1, 0, -1):\n            self.data[i] = self.func(self.data[i*2], self.data[i*2+1])\n\n    def update(self, i, x):\n        i += self.m\n        self.data[i] = x\n        while i > 1:\n            i >>= 1\n            self.data[i] = self.func(self.data[i*2], self.data[i*2+1])\n\n    def query(self, l, r):\n        l += self.m; r += self.m \n        res = self.ide\n        while l < r:\n            if l & 1:\n                res = self.func(res, self.data[l])\n                l += 1\n            if r & 1:\n                res = self.func(res, self.data[r-1])\n            l >>= 1; r >>= 1\n        return res\n  \n    def get(self, i):\n        return self.data[self.m+i]\n    \n    def get_data(self):\n        return self.data[self.m:self.m+self.n]\n\n    def __setitem__(self, idx, val):\n        assert isinstance(idx, int) and -self.n <= idx < self.n\n        self.update(idx % self.n, val)\n\n    def __getitem__(self, idx):\n        if isinstance(idx, slice):\n            l, r, _ = idx.indices(self.n)\n            assert l <= r\n            return self.query(l, r)\n        if isinstance(idx, int) and -self.n <= idx < self.n:\n            return self.get(idx % self.n)\n        raise AssertionError\n"
+    },
+    "cumsum.py": {
+        "prefix": "imlib cumsum",
+        "body": "class Cumsum:\n    def __init__(self, a):\n        self.n = len(a)\n        self.s = [0] * (self.n+1)\n        for i in range(self.n):\n            self.s[i+1] = self.s[i] + a[i]\n    def sum(self, l, r):\n        return self.s[r]-self.s[l]\n    def __getitem__(self, i):\n        return self.s[i]\n"
+    },
+    "lazy_segment_tree.py": {
+        "prefix": "imlib lazy_segment_tree",
+        "body": "# 遅延評価SegmentTree (RMQ and RUQ)\n# quety(l, r): 区間[l,r)の最小値\n# update(l, r, x): 区間[l,r)に含まれる全ての値をxに更新\nclass LazySegmentTree:\n    INF = float(\"inf\")\n\n    def __init__(self, n):\n        self.n = 1 << (n-1).bit_length()\n        self.data = [self.INF] * (self.n*2)\n        self.lazy = [None] * (self.n*2)\n    \n    def build(self, data):\n        for i, x in enumerate(data):\n            self.data[self.n+i] = x\n        for i in range(self.n-1, 0, -1):\n            self.data[i] = min(self.data[i*2], self.data[i*2+1])\n        \n    def query(self, l, r):\n        if not l < r: return self.INF\n        self.__propagate(self.__getidx(l, r))\n\n        l += self.n; r += self.n \n        res = self.INF\n        while l < r:\n            if l & 1:\n                res = min(res, self.data[l])\n                l += 1\n            if r & 1:\n                res = min(res, self.data[r-1])\n            l >>= 1; r >>= 1\n        return res\n    \n    def update(self, l, r, x):\n        if not l < r: return\n        idx = self.__getidx(l, r)\n        self.__propagate(idx)\n\n        l += self.n; r += self.n \n        while l < r:\n            if l & 1:\n                self.data[l], self.lazy[l] = x, x\n                l += 1\n            if r & 1:\n                self.data[r-1], self.lazy[r-1] = x, x\n            l >>= 1; r >>= 1\n    \n        for i in idx:\n            self.data[i] = min(self.data[i*2], self.data[i*2+1])\n\n    def __getidx(self, l, r):\n        l += self.n; r += self.n \n        lm = l // ((l & -l) << 1)\n        rm = r // ((r & -r) << 1)\n        res = []\n        while l < r:\n            if l <= lm: res.append(l)\n            if r <= rm: res.append(r)\n            l >>= 1; r >>= 1\n        while l:\n            res.append(l)\n            l >>= 1\n        return res\n    \n    def __propagate(self, idx):\n        for i in reversed(idx):\n            val = self.lazy[i]\n            if val is None: continue\n            self.lazy[i*2] = val; self.lazy[i*2+1] = val\n            self.data[i*2] = val; self.data[i*2+1] = val\n            self.lazy[i] = None\n"
+    },
+    "union_find.py": {
+        "prefix": "imlib union_find",
+        "body": "class UnionFind:\n    def __init__(self, n):\n        self.parent = [-1] * n\n\n    def find(self, x):\n        if self.parent[x] < 0: return x\n        self.parent[x] = self.find(self.parent[x])\n        return self.parent[x]\n\n    def unite(self, x, y):\n        x, y = self.find(x), self.find(y)\n        if x == y: return\n        if self.size(x) < self.size(y): x, y = y, x\n        self.parent[x] += self.parent[y]\n        self.parent[y] = x\n    \n    def same(self, x, y):\n        return self.find(x) == self.find(y)\n\n    def size(self, x):\n        return -self.parent[self.find(x)]\n"
+    },
+    "binary_indexed_tree.py": {
+        "prefix": "imlib binary_indexed_tree",
+        "body": "class BinaryIndexedTree:\n    def __init__(self, n):\n        self.n = n\n        self.data = [0] * (self.n+1)\n    \n    def _sum(self, i):\n        assert 0 <= i <= self.n\n        res = 0\n        while i > 0:\n            res += self.data[i]\n            i -= i & -i\n        return res\n    \n    def sum(self, i, j=None):\n        if j is None: return self._sum(i)\n        return self._sum(j) - self.sum(i)\n    \n    def add(self, i, x):\n        assert 0 <= i < self.n\n        i += 1\n        while i <= self.n:\n            self.data[i] += x\n            i += i & -i\n    \n    def lower_bound(self, x):\n        cur, s, k = 0, 0, 1 << (self.n.bit_length()-1)\n        while k:\n            nxt = cur + k \n            if nxt <= self.n and s + self.data[nxt] < x:\n                s += self.data[nxt]\n                cur = nxt\n            k >>= 1\n        return cur\n    \n    def get_data(self):\n        res, tmp = [0] * self.n, 0\n        for i in range(self.n):\n            s = self._sum(i+1)\n            res[i] = s-tmp\n            tmp = s\n        return res\n\n    def __getitem__(self, i):\n        return self.sum(i, i+1)\n"
+    },
+    "factrize_prime.py": {
+        "prefix": "imlib factrize_prime",
+        "body": "def init_factorize(lim=10**6+10, primes=None):\n    if primes is None:\n        table = [True] * (lim+1)\n        table[0:2] = False, False\n        for i in range(2, int(lim**0.5)+1):\n            if not table[i]: continue\n            for j in range(i*2, lim+1, i):\n                table[j] = False\n        primes = [i for i in range(lim+1) if table[i]]\n\n    def factorize(x):\n        res = []\n        for p in primes:\n            if p ** 2 > x: break\n            cnt = 0\n            while not x % p:\n                x //= p\n                cnt += 1\n            if cnt: res.append((p, cnt))\n        if x > 1: res.append((x, 1))\n        return res\n    \n    return factorize\n"
+    },
+    "mod.py": {
+        "prefix": "imlib mod",
+        "body": "MOD_L = 10**6+10\nfact = [1, 1] + [0] * (MOD_L-1)\nfact_inv = [1, 1] + [0] * (MOD_L-1)\ninv = [0, 1] + [0] * (MOD_L-1)\nfor i in range(2, MOD_L+1):\n    fact[i] = fact[i-1] * i % MOD\n    inv[i] = MOD - inv[MOD % i] * (MOD//i) % MOD\n    fact_inv[i] = fact_inv[i-1] * inv[i] % MOD\ndef mod_comb(n, m):\n    if n < m or n < 0 or m < 0: return 0\n    return fact[n] * (fact_inv[m] * fact_inv[n-m] % MOD) % MOD\n"
+    },
+    "get_prime.py": {
+        "prefix": "imlib get_prime",
+        "body": "def get_prime(lim):\n    table = [True] * (lim+1)\n    table[0:2] = False, False\n    for i in range(2, int(lim**0.5)+1):\n        if not table[i]: continue\n        for j in range(i*2, lim+1, i):\n            table[j] = False\n    return [i for i in range(lim+1) if table[i]]\n"
+    },
+    "get_divisor.py": {
+        "prefix": "imlib get_divisor",
+        "body": "def get_divisor(num):\n    f_divs, l_divs = [], []\n    for i in range(1, int(num**0.5)+1):\n        if not num % i:\n            f_divs.append(i)\n            if i != num // i:\n                l_divs.append(num // i)\n    return f_divs + l_divs[::-1]\n\n\nif __name__ == \"__main__\":\n    for i in range(100):\n        print(i, get_divisor(i))\n"
+    },
+    "factorize.py": {
+        "prefix": "imlib factorize",
+        "body": "def factorize(x, lim=10**6+10):\n    res = []\n    for i in range(2, int(lim**0.5)+1):\n        cnt = 0\n        while not x % i:\n            x //= i\n            cnt += 1\n        if cnt: res.append((i, cnt))\n    if x > 1: res.append((x, 1))\n    return res\n"
+    },
+    "is_prime.py": {
+        "prefix": "imlib is_prime",
+        "body": "def is_prime(x):\n    if x == 2: return True\n    if x == 1 or not x % 2: return False\n    for i in range(3, int(x**0.5)+1, 2):\n        if not x % i: return False\n    else: return True\n"
+    },
+    "template.py": {
+        "prefix": "imlib template",
+        "body": "import sys\n\ninput = lambda: sys.stdin.buffer.readline()\nstrinput = lambda: sys.stdin.readline()[:-1]\nsys.setrecursionlimit(10**7)\n\ndef solve():\n    $1\n    return\n\nsolve()\n"
+    },
+    "warshall_floyd.py": {
+        "prefix": "imlib warshall_floyd",
+        "body": "# グラフの初期値は必ずINFにすること\ndef warshall_floyd(d, n):\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                d[i][j] = min(d[i][j], d[i][k] + d[k][j])\n    return d\n"
+    },
+    "dijkstra.py": {
+        "prefix": "imlib dijkstra",
+        "body": "def dijkstra(graph, n, s):\n    d = [INF] * n\n    d[s], q = 0, [(0, s)]\n    while q:\n        dist, v = heappop(q)\n        if d[v] < dist: continue\n        for nv, cost in graph[v]:\n            if d[nv] > d[v] + cost:\n                d[nv] = d[v] + cost\n                heappush(q, (d[nv], nv))\n    return d\n"
+    },
+    "bellman_ford.py": {
+        "prefix": "imlib bellman_ford",
+        "body": "def bellman_ford(edges, n, s):\n    d = [INF] * n\n    d[s] = 0\n    for i in range(n):\n        for f, t, c in edges:\n            if d[f] == INF: continue\n            if d[t] > d[f] + c:\n                if i == n-1: d[t] = -INF\n                else: d[t] = d[f] + c\n    for i in range(n):\n        for f, t, c in edges:\n            if d[f] == INF: continue\n            d[t] = min(d[t], d[f] + c)\n    return d\n"
+    }
+}

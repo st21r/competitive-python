@@ -1,0 +1,171 @@
+{
+	// Input
+	"iinput": {
+		"prefix": "iinput",
+		"body": "int(input())"
+	},
+	"mulinput": {
+		"prefix": "mulinput",
+		"body": "map(int, input().split())"
+	},
+	"mulinput1": {
+		"prefix": "mulinput1",
+		"body": "map(lambda x: int(x)-1, input().split())"
+	},
+	"listinput": {
+		"prefix": "listinput",
+		"body": "list(map(int, input().split()))"
+	},
+	"listinput1": {
+		"prefix": "listinput1",
+		"body": "list(map(lambda x: int(x)-1, input().split()))"
+	},
+	"listinputwithidx": {
+		"prefix": "listinputwithidx",
+		"body": "[(int(x), i) for i, x in enumerate(input().split())]"
+	},
+	"lineinput": {
+		"prefix": "lineinput",
+		"body": "[int(input()) for _ in range(${1:n})]"
+	},
+	"linetupleinput": {
+		"prefix": "linetupleinput",
+		"body": "[tuple(map(int, input().split())) for _ in range(${1:n})]"
+	},
+	"2dlistinput": {
+		"prefix": "2dlistinput",
+		"body": "[list(map(int, input().split())) for _ in range(${1:h})]"
+	},
+
+	// Import library
+	"import sys": {
+		"prefix": "im sys",
+		"body": "import sys"
+	},
+	"import bisect": {
+		"prefix": "im bisect",
+		"body": "from bisect import bisect_left, bisect_right"
+	},
+	"import deepcopy": {
+		"prefix": "im copy",
+		"body": "from copy import deepcopy"
+	},
+	"import counter": {
+		"prefix": "im counter",
+		"body": "from collections import Counter"
+	},
+	"import deque": {
+		"prefix": "im deque",
+        "body": "from collections import deque"
+	},
+	"import defaultdict": {
+		"prefix": "im ddict",
+		"body": "from collections import defaultdict"
+	},
+	"import heapq": {
+		"prefix": "im heapq",
+		"body": "from heapq import heappop, heappush, heapify"
+	},
+	"import permutations": {
+		"prefix": "im perms",
+		"body": "from itertools import permutations"
+	},
+	"import combinations": {
+		"prefix": "im combs",
+		"body": "from itertools import combinations"
+	},
+	"import product": {
+		"prefix": "im product",
+		"body": "from itertools import product"
+	},
+	"import gcd": {
+		"prefix": "im gcd",
+		"body": "from math import gcd"
+	},
+	"import sqrt": {
+		"prefix": "im sqrt",
+		"body": "from math import sqrt"
+	},
+	"import math": {
+		"prefix": "im math",
+		"body": "from math import *; del pow"
+	},
+	"import numpy": {
+		"prefix": "im numpy",
+		"body": "import numpy as np"
+	},
+	"import decimal": {
+		"prefix": "im decimal",
+		"body": "from decimal import *"
+	},
+	"import reduce": {
+		"prefix": "im reduce",
+		"body": "from functools import reduce"
+	},
+
+	// Define const
+	"definf": {
+		"prefix": "definf",
+		"body": "INF = float(\"inf\")"
+	},
+	"defmod": {
+		"prefix": "defmod",
+		"body": "MOD = 10**9+7"
+	},
+	"defmod998244353": {
+		"prefix": "defmod998244353",
+		"body": "MOD = 998244353"
+	},
+	"arr4": {
+		"prefix": "defarr4",
+		"body": "arr4 = ((-1, 0), (0, -1), (1, 0), (0, 1))"
+	},
+	"arr8": {
+		"prefix": "defarr8",
+		"body": "arr8 = ((-1, 0), (0, -1), (1, 0), (0, 1), (-1, 1), (-1, -1), (1, -1), (1, 1))"
+	},
+
+	// Define function
+	"lcm": {
+		"prefix": "deflcm",
+		"body": "lcm = lambda x, y: x * y // gcd(x, y)"
+	},
+	"modinv": {
+		"prefix": "defmodinv",
+		"body": "modinv = lambda x: pow(x, MOD-2, MOD)"
+	},
+	"transpose": {
+		"prefix": "deftranspose",
+		"body": "transpose = lambda a: list(map(list, zip(*a)))"
+	},
+	"argmax": {
+		"prefix": "defargmax",
+		"body": "argmax = lambda a: max(enumerate(a), key=lambda x: x[1])[0]"
+	},
+	"argmin": {
+		"prefix": "defargmin",
+		"body": "argmin = lambda a: min(enumerate(a), key=lambda x: x[1])[0]"
+	},
+	
+	// Others
+	"setreclim": {
+		"prefix": "setreclim",
+		"body": "sys.setrecursionlimit(10**7)"
+	},
+	"inf": {
+		"prefix": "inf",
+		"body": "float(\"inf\")"
+	},
+	"reverse": {
+		"prefix": "rev",
+		"body": "reverse=True"
+	},
+	"sepline": {
+		"prefix": "sepline",
+		"body": "sep=\"\\n\""
+	},
+	"range": {
+		"prefix": "ran",
+		"body": "range($1)"
+	},
+}
