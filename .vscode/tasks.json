@@ -3,9 +3,9 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "Run solve.py",
-			"command": "python3",
-			"args": ["solve.py", "<", "input.txt"],
+			"label": "run.sh",
+			"command": "sh",
+			"args": ["run.sh"],
 			"group": {
 				"kind": "build",
 				"isDefault": true

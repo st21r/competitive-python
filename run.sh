@@ -1,0 +1,1 @@
+python3 solve.py < input.txt > output.txt
