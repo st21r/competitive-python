@@ -1,7 +1,6 @@
 import os
 import glob
 import json
-import sys
 
 EXTENSION = ".py"
 INPUT_DIR = "./lib"

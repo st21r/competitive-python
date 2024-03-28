@@ -1,6 +1,10 @@
+from heapq import heappop, heappush
+INF = float("inf")
+
 def dijkstra(graph, n, s):
     d = [INF] * n
-    d[s], q = 0, [(0, s)]
+    d[s] = 0
+    q = [(0, s)]
     while q:
         dist, v = heappop(q)
         if d[v] < dist: continue
