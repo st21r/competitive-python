@@ -2,7 +2,7 @@ class Array2d:
     def __init__(self, h, w, init_val = 0):
         self.h, self.w = h, w
         self.data = [init_val] * (h*w)
-    def __call__(self, data):
+    def __call__(self, data): # build with 2d-list
         assert len(data) == self.h
         for i in range(self.h):
             assert len(data[i]) == self.w
@@ -23,13 +23,31 @@ class Array2d:
         assert type(idx) == tuple
         i, j = idx
         self.set(i, j, value)
-    def tostr(self, sep=" "):
+    def dmp(self, sep=" "):
         res = ""
         for i in range(self.h):
             res += sep.join(map(str, self.data[i*self.w:(i+1)*self.w])) + "\n"
         return res
     def __str__(self):
-        return self.tostr()
+        return self.dmp()
+    def all(self, y1, x1, y2, x2, val):
+        assert y1 <= y2
+        assert x1 <= x2
+        if y1 < 0 or y2 > self.h: return False
+        if x1 < 0 or x2 > self.w: return False
+        for y in range(y1, y2):
+            for x in range(x1, x2):
+                if self.data[y*self.w+x] != val:
+                    return False
+        return True
+    def fill(self, y1, x1, y2, x2, val):
+        assert y1 <= y2
+        assert x1 <= x2
+        if y1 < 0 or y2 > self.h: return False
+        if x1 < 0 or x2 > self.w: return False
+        for y in range(y1, y2):
+            for x in range(x1, x2):
+                self.data[y*self.w+x] = val
     def rotate(self):
         assert self.h == self.w
         tmp = [None] * (self.h*self.w)

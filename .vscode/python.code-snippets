@@ -124,6 +124,10 @@
 		"prefix": "defarr8",
 		"body": "arr8 = ((-1, 0), (0, -1), (1, 0), (0, 1), (-1, 1), (-1, -1), (1, -1), (1, 1))"
 	},
+	"c2dir": {
+		"prefix": "defc2dir",
+		"body": "c2dir = {'U': (-1, 0), 'L': (0, -1), 'D': (1, 0), 'R': (0, 1)}"
+	},
 
 	// Define function
 	"lcm": {
@@ -166,6 +170,10 @@
 	},
 	"range": {
 		"prefix": "ran",
-		"body": "range($1)"
+		"body": "range($1):"
+	},
+	"input": {
+		"prefix": "inp",
+		"body": "input()"
 	},
 }
