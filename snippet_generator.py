@@ -33,4 +33,4 @@ if __name__ == "__main__":
     snippets = create_snippets(INPUT_DIR)
     with open(OUTPUT_DIR + OUTPUT_FILE_NAME, mode="w") as f:
         f.write(json.dumps(snippets, ensure_ascii=False, indent=4))
-    print("the snippet was generated successfully.")
+    print("snippets were generated successfully.")

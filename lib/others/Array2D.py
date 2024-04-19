@@ -1,7 +1,8 @@
 class Array2d:
-    def __init__(self, h, w, init_val = 0):
+    def __init__(self, h, w, init_v = 0, out_v = None):
         self.h, self.w = h, w
-        self.data = [init_val] * (h*w)
+        self.data = [init_v] * (h*w)
+        self.out_v = out_v
     def __call__(self, data): # build with 2d-list
         assert len(data) == self.h
         for i in range(self.h):
@@ -9,7 +10,7 @@ class Array2d:
             for j in range(self.w):
                 self.data[i*self.w+j] = data[i][j]
     def get(self, i, j):
-        if i < 0 or j < 0 or i >= self.h or j >= self.w: return None
+        if i < 0 or j < 0 or i >= self.h or j >= self.w: return self.out_v
         return self.data[i*self.w+j]
     def set(self, i, j, value):
         if i < 0 or j < 0 or i >= self.h or j >= self.w: return False

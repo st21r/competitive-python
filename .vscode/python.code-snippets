@@ -156,6 +156,10 @@
 		"prefix": "setreclim",
 		"body": "sys.setrecursionlimit(10**7)"
 	},
+	"setfastinput": {
+		"prefix": "setfastinput",
+		"body": "input = lambda: sys.stdin.buffer.readline()\ninputstr = lambda: sys.stdin.readline()[:-1]"
+	},
 	"inf": {
 		"prefix": "inf",
 		"body": "float(\"inf\")"
