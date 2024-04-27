@@ -1,10 +1,13 @@
 import sys
 import random
 
-n = 200000
-
 def generate():
-    print(n)
+    h, w = 1000, 1000
+    print(h, w)
+    for i in range(h):
+        for j in range(w):
+            print(random.choice(['.', '#']), end='')
+        print()
     
 
 with open('input.txt', mode='w') as f:

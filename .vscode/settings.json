@@ -6,5 +6,4 @@
     ],
     "python.linting.flake8CategorySeverity.F": "Hint",
     "python.linting.enabled": false,
-    "python.languageServer": "Pylance",
 }

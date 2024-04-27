@@ -1,4 +1,4 @@
-#!/home/sk4rd/Documents/competitive-python/.venv/bin/python
+#!/home/sk4rd/Documents/competitive-python/.venv/bin/pypy3
 # -*- coding: utf-8 -*-
 import re
 import sys

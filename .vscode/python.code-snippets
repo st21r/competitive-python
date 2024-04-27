@@ -160,6 +160,10 @@
 		"prefix": "setfastinput",
 		"body": "input = lambda: sys.stdin.buffer.readline()\ninputstr = lambda: sys.stdin.readline()[:-1]"
 	},
+	"setrec": {
+		"prefix": "setrec",
+		"body": "import pypyjit\nsys.setrecursionlimit(10**7); pypyjit.set_param('max_unroll_recursion=0')"
+	},
 	"inf": {
 		"prefix": "inf",
 		"body": "float(\"inf\")"
@@ -180,4 +184,8 @@
 		"prefix": "inp",
 		"body": "input()"
 	},
+	"gridnxt": {
+		"prefix": "for dy",
+		"body": "for dy, dx in arr4:\n    ny, nx = y+dy, x+dx"
+	}
 }
