@@ -64,7 +64,7 @@
 	},
 	"import heapq": {
 		"prefix": "im heapq",
-		"body": "from heapq import heappop, heappush, heapify"
+		"body": "from heapq import heappop, heappush"
 	},
 	"import permutations": {
 		"prefix": "im perms",

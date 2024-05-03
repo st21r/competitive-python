@@ -25,7 +25,7 @@
     },
     "header.py": {
         "prefix": "imlib header",
-        "body": "import sys\nfrom bisect import bisect_left, bisect_right\nfrom collections import defaultdict, deque\nINF = 1e18; arr4 = ((-1, 0), (0, -1), (1, 0), (0, 1))\ndef dmp(*args, sep=\" \", end=\"\\n\"): print(*args, sep=sep, end=end, file=sys.stderr)\nif \"DEBUG\" not in sys.argv: dmp = lambda *args: None\n"
+        "body": "import sys\nfrom bisect import bisect_left, bisect_right\nfrom collections import defaultdict, deque\nfrom itertools import product\nINF = int(1e18); arr4 = ((-1, 0), (0, -1), (1, 0), (0, 1))\ndef dmp(*args, sep=\" \", end=\"\\n\"): print(*args, sep=sep, end=end, file=sys.stderr)\nif \"DEBUG\" not in sys.argv: dmp = lambda *args: None\n"
     },
     "array_2d.py": {
         "prefix": "imlib array_2d",

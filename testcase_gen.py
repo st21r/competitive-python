@@ -1,12 +1,17 @@
 import sys
 import random
+import string
 
 def generate():
-    h, w = 1000, 1000
-    print(h, w)
-    for i in range(h):
-        for j in range(w):
-            print(random.choice(['.', '#']), end='')
+    n = 5000
+    m = 1000
+    print(50, end=" ")
+    for i in range(n):
+        print(random.choice(string.ascii_lowercase), end='')
+    print()
+    for i in range(m):
+        for _ in range(500000//m):
+            print(random.choice(string.ascii_lowercase), end='')
         print()
     
 
