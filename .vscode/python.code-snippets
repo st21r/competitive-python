@@ -166,7 +166,7 @@
 	},
 	"inf": {
 		"prefix": "inf",
-		"body": "float(\"inf\")"
+		"body": "int(1e18)"
 	},
 	"reverse": {
 		"prefix": "rev",
