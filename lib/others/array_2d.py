@@ -18,22 +18,29 @@ class Array2d:
             assert len(l) == self.w
             for j in range(self.w):
                 self.data[i*self.w+j] = l[j]
-    def get(self, i, j):
+        return self
+    def _get(self, i, j):
         if i < 0 or j < 0 or i >= self.h or j >= self.w: return self.out_val
         return self.data[i*self.w+j]
-    def set(self, i, j, value):
+    def _set(self, i, j, value):
         if i < 0 or j < 0 or i >= self.h or j >= self.w: return False
         self.data[i*self.w+j] = value
         return True
     def __getitem__(self, idx):
         assert type(idx) == tuple
         i, j = idx
-        return self.get(i, j)
+        return self._get(i, j)
     def __setitem__(self, idx, value):
         assert type(idx) == tuple
         i, j = idx
-        self.set(i, j, value)
-    def copy(self):
+        self._set(i, j, value)
+    def row(self, i):
+        assert 0 <= i < self.h
+        return self.data[self.w*i:self.w*(i+1)]
+    def col(self, i):
+        assert 0 <= i < self.w
+        return self.data[i::self.w]
+    def get_copy(self):
         a = Array2d(self.h, self.w, mode=self.mode, init_val=self.init_val, out_val=self.out_val)
         a.data = self.data[:]
         return a
@@ -90,6 +97,6 @@ class Array2d:
         h, w = self.w, self.h
         for i in range(h):
             for j in range(w):
-                tmp[i*w+j] = self.get(w-j-1, i)
+                tmp[i*w+j] = self._get(w-j-1, i)
         self.data = tmp
         self.h, self.w = h, w
