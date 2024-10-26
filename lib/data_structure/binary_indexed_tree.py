@@ -22,9 +22,11 @@ class BIT:
             self.i = i
             self.val = val
         def __iadd__(self, x):
-            self.outer.add(self.i, x)
+            self.outer.add(self.i, int(x))
         def __isub__(self, x):
-            self.outer.add(self.i, -x)
+            self.outer.add(self.i, -int(x))
+        def __int__(self):
+            return self.val
         def __str__(self):
             return str(self.val)
 
